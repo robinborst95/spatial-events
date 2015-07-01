@@ -4,10 +4,13 @@
   "dependencies": {
     "bootstrap-sass": "~3.3.5",
     "modernizr": "~2.8.1",
-    "leaflet-draw": "~0.2.4",
     "leaflet": "~0.7.3",
+    "mapbox.js": "~2.2.1",
+    "leaflet-draw": "~0.2.4",
     "jquery": "~2.1.4",
-    "lodash": "~3.10.0"
+    "lodash": "~3.10.0",
+    "moment": "~2.10.3",
+    "eonasdan-bootstrap-datetimepicker": "~4.14.30"
   },
   "overrides": {
     "bootstrap-sass": {
@@ -16,6 +19,9 @@
         "assets/fonts/bootstrap/*",
         "assets/javascripts/bootstrap.js"
       ]
+    },
+    "leaflet-draw": {
+      "dependencies": {}
     }
   }
 }
