@@ -10,9 +10,11 @@ $(function () {
         // store data
         $("#modal-form").modal('hide');
         // get variables from the form
-        var properties =  $('#modal-form').data().feature.properties;
+        var layer = $('#modal-form').data();
+        var properties =  layer.feature.properties;
         properties.startDate = $('#startDate').data("DateTimePicker").date().toJSON();
         properties.endDate = $('#endDate').data("DateTimePicker").date().toJSON();
-
+        properties.tags = $('#tags').val();
+        console.log('geojson', layer.toGeoJSON());
     });
 });
