@@ -4,11 +4,11 @@
 
 function uuid () {
     // Generate a somwhat unique uuid
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+    var text = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
-    return uuid;
+    return text;
 }
 function addMap(){
     // better background map
@@ -59,9 +59,9 @@ function addMap(){
     var drawControl = new L.Control.Draw(options);
     map.addControl(drawControl);
 
-    map.on('draw:created', function (e) {
-        var type = e.layerType,
-            layer = e.layer;
+    map.on('draw:created', function (drawEvt) {
+        var type = drawEvt.layerType,
+            layer = drawEvt.layer;
         // fill in part of the feature
         layer.feature = {
             type: 'Feature',
@@ -71,18 +71,18 @@ function addMap(){
                 clientId: uuid()
             }
         };
-        var geojson = layer.toGeoJSON()
+        var geojson = layer.toGeoJSON();
 
         console.log('created', geojson);
-        layer.on('click', function(e){
-            console.log('click', e);
+        layer.on('click', function(evt){
+            console.log('click', evt);
             if (map.properties.editing || map.properties.deleting) {
                 return;
-            };
-            $('#startDate').data("DateTimePicker").date(moment(layer.feature.properties.startDate));
-            $('#endDate').data("DateTimePicker").date(moment(layer.feature.properties.endDate));
+            }
+            $('#startDate').data('DateTimePicker').date(moment(layer.feature.properties.startDate));
+            $('#endDate').data('DateTimePicker').date(moment(layer.feature.properties.endDate));
             $('#modal-form').data(layer);
-            $('#modal-form').modal({})
+            $('#modal-form').modal({});
         });
         // Do whatever else you need to. (save to db, add to map etc)
         editableLayers.addLayer(layer);
@@ -92,7 +92,7 @@ function addMap(){
         var layers = e.layers;
         layers.eachLayer(function (layer) {
             //do whatever you want, most likely save back to db
-            var geojson = layer.toGeoJSON()
+            var geojson = layer.toGeoJSON();
             console.log('edited', geojson);
 
         });
@@ -117,7 +117,7 @@ function addMap(){
         var layers = e.layers;
         layers.eachLayer(function (layer) {
             //do whatever you want, most likely save back to db
-            var geojson = layer.toGeoJSON()
+            var geojson = layer.toGeoJSON();
             console.log('deleted', geojson);
 
         });
