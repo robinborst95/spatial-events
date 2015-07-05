@@ -2,7 +2,7 @@
 /*eslint-disable no-unused-vars */
 'use strict';
 
-functionuuid() {
+function uuid() {
     // Generate a somewhat unique uuid
     var text = ('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx')
             .replace(/[xy]/g, function(c) {
@@ -12,7 +12,7 @@ functionuuid() {
             });
     return text;
 }
-functionaddMap() {
+function addMap() {
     // better background map
     // L.mapbox.accessToken = 'pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA';
     // var map = L.mapbox.map('map', 'siggyf.c74e2e04');
@@ -76,7 +76,7 @@ functionaddMap() {
         var geojson = layer.toGeoJSON();
 
         console.log('created', geojson);
-        layer.on('click', function(evt){
+        layer.on('click', function(evt) {
             console.log('click', evt);
             if (map.properties.editing || map.properties.deleting) {
                 return;
