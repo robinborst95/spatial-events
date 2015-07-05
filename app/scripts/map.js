@@ -2,15 +2,17 @@
 /*eslint-disable no-unused-vars */
 'use strict';
 
-function uuid () {
-    // Generate a somwhat unique uuid
-    var text = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
+functionuuid() {
+    // Generate a somewhat unique uuid
+    var text = ('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx')
+            .replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0;
+                var v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
     return text;
 }
-function addMap(){
+functionaddMap() {
     // better background map
     // L.mapbox.accessToken = 'pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA';
     // var map = L.mapbox.map('map', 'siggyf.c74e2e04');
@@ -59,7 +61,7 @@ function addMap(){
     var drawControl = new L.Control.Draw(options);
     map.addControl(drawControl);
 
-    map.on('draw:created', function (drawEvt) {
+    map.on('draw:created', function(drawEvt) {
         var type = drawEvt.layerType,
             layer = drawEvt.layer;
         // fill in part of the feature
@@ -68,7 +70,7 @@ function addMap(){
             properties: {
                 startDate: moment().toJSON(),
                 endDate: moment().add(2, 'weeks').toJSON(),
-                clientId: uuid()
+                incidentId: uuid()
             }
         };
         var geojson = layer.toGeoJSON();
@@ -88,34 +90,34 @@ function addMap(){
         editableLayers.addLayer(layer);
     });
 
-    map.on('draw:edited', function (e) {
+    map.on('draw:edited', function(e) {
         var layers = e.layers;
-        layers.eachLayer(function (layer) {
+        layers.eachLayer(function(layer) {
             //do whatever you want, most likely save back to db
             var geojson = layer.toGeoJSON();
             console.log('edited', geojson);
 
         });
     });
-    map.on('draw:deletestart', function(e){
+    map.on('draw:deletestart', function(e) {
         console.log('about to delete', e);
         map.properties.deleting = true;
     });
-    map.on('draw:editstart', function(e){
+    map.on('draw:editstart', function(e) {
         console.log('about to edit');
         map.properties.editing = true;
     });
-    map.on('draw:deletestop', function(e){
+    map.on('draw:deletestop', function(e) {
         console.log('no more deletes', e);
         map.properties.deleting = false;
     });
-    map.on('draw:editstop', function(e){
+    map.on('draw:editstop', function(e) {
         console.log('no more edits');
         map.properties.editing = false;
     });
-    map.on('draw:deleted', function (e) {
+    map.on('draw:deleted', function(e) {
         var layers = e.layers;
-        layers.eachLayer(function (layer) {
+        layers.eachLayer(function(layer) {
             //do whatever you want, most likely save back to db
             var geojson = layer.toGeoJSON();
             console.log('deleted', geojson);
