@@ -48,18 +48,22 @@ var on_connect = function() {
                 )
             }
             feature.addTo(map);
+
             // remove layer after 1 second
-            setTimeout(function(){
-                _.each(
-                    _.values(feature._layers),
-                    function(layer){
-                        $(layer._path).fadeOut({
+            _.each(
+                _.values(feature._layers),
+                function(layer){
+                    // add the path, hide it, fade in, wait it bit, fade out and toss away
+                    $(layer._path)
+                        .hide()
+                        .fadeIn()
+                        .delay(3000)
+                        .fadeOut({
                             duration: 'slow',
                             complete: function(){ map.removeLayer(feature); }
                         });
-                    }
-                );
-            }, 2000);
+                }
+            );
             feature.on('click', function(){
                 console.log(this);
 

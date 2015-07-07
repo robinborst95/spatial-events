@@ -20,7 +20,7 @@ function addMap() {
     // var map = L.mapbox.map('map', 'siggyf.c74e2e04');
 
     map = L.map('map');
-    map.setView([51.505, -0.09], 13);
+    map.setView([51.505, -0.09], 3);
     L.tileLayer(
         'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
         {
