@@ -2,6 +2,7 @@
 /*eslint-disable no-unused-vars */
 'use strict';
 
+var map;
 function uuid () {
     // Generate a somwhat unique uuid
     var text = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -15,7 +16,7 @@ function addMap(){
     // L.mapbox.accessToken = 'pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA';
     // var map = L.mapbox.map('map', 'siggyf.c74e2e04');
 
-    var map = L.map('map');
+    map = L.map('map');
     map.setView([51.505, -0.09], 13);
     L.tileLayer(
         'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
