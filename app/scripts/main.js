@@ -16,6 +16,9 @@ $(function () {
         properties.startDate = $('#startDate').data('DateTimePicker').date().toJSON();
         properties.endDate = $('#endDate').data('DateTimePicker').date().toJSON();
         properties.tags = $('#tags').val();
-        console.log('geojson', layer.toGeoJSON());
+        var geojson = layer.toGeoJSON();
+        console.log('geojson', geojson);
+        var event = new CustomEvent('incident', {'detail': geojson});
+        document.dispatchEvent(event);
     });
 });
