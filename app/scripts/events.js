@@ -50,6 +50,7 @@ function fixCoords(coords) {
 }
 
 var subscription;
+
 var on_connect = function() {
     console.log('connected');
     subscription = client.subscribe(
@@ -58,45 +59,10 @@ var on_connect = function() {
             var obj = JSON.parse(message.body);
             var wkt = obj.footprint;
             var feature = omnivore.wkt.parse(wkt);
+            feature.setStyle({fillColor: 'blue'});
             // replace coords by fixed coordinates (wrap around 180o)
             var coords = _.values(feature._layers)[0];
-
-            // Work around leaflet bug....pfff...
-            // update if any coordinates is < 180
-            if (
-                _.any(
-                    _.map(
-                        coords._latlngs,
-                        function(x) {
-                            return x.lng < -0;
-                        }
-                    )
-                )
-            ) {
-                // this whole thing is needed to fix some bug in leaflet where
-                // coordinates around the 180 degree break
-                coords._latlngs = _.map(
-                    coords._latlngs,
-                    function(x, i) {
-                        if (i > 0) {
-                            // if we have a jump of more than 180deg
-                            // this -> coords._latlngs
-                            if ((x.lng - this[i - 1].lng) < -180.0) {
-                                var wrapped = new L.latLng(x.lat, x.lng + 360, true);
-                                this[i] = wrapped;
-                                return wrapped;
-                            }
-                            if ((x.lng - this[i - 1].lng) > 180.0) {
-                                var wrapped = new L.latLng(x.lat, x.lng - 360, true);
-                                this[i] = wrapped;
-                                return wrapped;
-                            }
-                        }
-                        return x;
-                    },
-                    coords._latlngs
-                )
-            }
+            coords = fixCoords(coords);
 
             // back to what we wanted to do... add it to the map
             feature.addTo(map);
@@ -123,11 +89,12 @@ var on_connect = function() {
         }
     );
     subscription = client.subscribe(
-        '/queue/crisis_download',
+        '/exchange/crisis_download',
         function(message) {
             var obj = JSON.parse(message.body);
             var wkt = obj.footprint;
             var feature = omnivore.wkt.parse(wkt);
+            feature.setStyle({fillColor: 'green'});
             // replace coords by fixed coordinates (wrap around 180o)
             var coords = _.values(feature._layers)[0];
 
@@ -142,11 +109,11 @@ var on_connect = function() {
                     $(layer._path)
                         .hide()
                         .fadeIn()
-                        .delay(3000);
-                        // .fadeOut({
-                        //     duration: 'slow',
-                        //     complete: function(){ map.removeLayer(feature); }
-                        // });
+                        .delay(10000)
+                        .fadeOut({
+                            duration: 'slow',
+                            complete: function(){ map.removeLayer(feature); }
+                        });
                 }
             );
             feature.on('click', function(){
@@ -160,7 +127,7 @@ var on_connect = function() {
         'incident',
         function(evt) {
             console.log('send to rabbitmq', evt.detail);
-            client.send('/queue/crisis_incident', {"content-type":"application/json"}, JSON.stringify(evt.detail));
+            client.send('/exchange/crisis_incident', {"content-type":"application/json"}, JSON.stringify(evt.detail));
         }
     );
 

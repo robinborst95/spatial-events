@@ -7,6 +7,10 @@ $icon-font-path: '../fonts/';
 #map {
     height: 100vh;
 }
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
 .row {
   margin-left: 0px;
   margin-right: 0px;
