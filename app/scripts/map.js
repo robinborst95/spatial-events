@@ -70,8 +70,8 @@ function addMap() {
         layer.feature = {
             type: 'Feature',
             properties: {
-                startDate: moment().toJSON(),
-                endDate: moment().add(2, 'weeks').toJSON(),
+                startDate: moment().add(-1, 'weeks').toJSON(),
+                endDate: moment().add(1, 'weeks').toJSON(),
                 incidentId: uuid()
             }
         };
