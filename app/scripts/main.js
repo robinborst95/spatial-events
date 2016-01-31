@@ -1,4 +1,4 @@
-/* global addMap */
+/* global addMap, addTweets */
 /* jshint devel:true */
 'use strict';
 
