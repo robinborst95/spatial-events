@@ -10,3 +10,31 @@ $icon-font-path: '../fonts/';
 img.leaflet-tile {
   /* css filters can style the map */
 }
+
+#d {
+  display: none;
+}
+
+.tweet {
+  width: 300px;
+}
+.twitter-tweet {
+  min-width: 100px;
+  min-height: 100px;
+  font-size: 1em;
+  padding: 3px;
+  margin: 3px;
+  p {
+    margin: 0;
+  }
+
+}
+#map {
+  path {
+    fill: white;
+    fill-opacity: 0.1;
+    stroke-width: 1;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+}
