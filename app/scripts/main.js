@@ -3,6 +3,7 @@
 'use strict';
 
 addMap();
+addTweets();
 // submit form
 $(function () {
     $('#startDate').datetimepicker();

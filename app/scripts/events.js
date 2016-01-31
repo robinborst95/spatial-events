@@ -1,4 +1,3 @@
-
 // global: map, SockJS, Stomp, omnivore
 var domain = '54.76.43.47';
 // 172.28.128.3
@@ -84,42 +83,7 @@ var on_connect = function() {
             feature.on('click', function(){
                 console.log(this);
 
-            })
-
-        }
-    );
-    subscription = client.subscribe(
-        '/exchange/crisis_download',
-        function(message) {
-            var obj = JSON.parse(message.body);
-            var wkt = obj.footprint;
-            var feature = omnivore.wkt.parse(wkt);
-            feature.setStyle({fillColor: 'green'});
-            // replace coords by fixed coordinates (wrap around 180o)
-            var coords = _.values(feature._layers)[0];
-
-            coords = fixCoords(coords);
-            // back to what we wanted to do... add it to the map
-            feature.addTo(map);
-            // remove layer after 1 second
-            _.each(
-                _.values(feature._layers),
-                function(layer) {
-                    // add the path, hide it, fade in, wait it bit, fade out and toss away
-                    $(layer._path)
-                        .hide()
-                        .fadeIn()
-                        .delay(10000)
-                        .fadeOut({
-                            duration: 'slow',
-                            complete: function(){ map.removeLayer(feature); }
-                        });
-                }
-            );
-            feature.on('click', function(){
-                console.log(this);
-
-            })
+            });
 
         }
     );
@@ -136,4 +100,3 @@ var on_error = function(evt) {
     console.log('error', evt);
 };
 client.connect('public', 'public', on_connect, on_error, '/');
-

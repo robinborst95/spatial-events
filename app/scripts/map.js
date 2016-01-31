@@ -20,13 +20,13 @@ function addMap() {
     // var map = L.mapbox.map('map', 'siggyf.c74e2e04');
 
     map = L.map('map');
-    map.setView([51.505, -0.09], 3);
-    L.tileLayer(
-        'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
-        {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-        }
-    ).addTo(map);
+    map.setView([51.505, 3.09], 8);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'siggyf.c74e2e04',
+        accessToken: 'pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA'
+    }).addTo(map);
     map.properties = {
         editing: false,
         deleting: false
