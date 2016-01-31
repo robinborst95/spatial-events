@@ -5,6 +5,8 @@ import browserSync from 'browser-sync';
 import del from 'del';
 import {stream as wiredep} from 'wiredep';
 
+import githubPages from 'gulp-gh-pages';
+
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
@@ -75,12 +77,26 @@ gulp.task('images', () => {
     })))
     .pipe(gulp.dest('dist/images'));
 });
+// referenced wrong....
+gulp.task('more-images', () => {
+    return gulp.src([
+        'bower_components/leaflet-draw/dist/**/*.{png,jpg,svg}'
+    ])
+        .pipe(gulp.dest('dist/styles'));
+});
+
 
 gulp.task('fonts', () => {
   return gulp.src(require('main-bower-files')('**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
     .concat('app/fonts/**/*'))
     .pipe(gulp.dest('.tmp/fonts'))
     .pipe(gulp.dest('dist/fonts'));
+});
+
+gulp.task('data', () => {
+    return gulp.src([
+        'app/data/**/*'
+    ]).pipe(gulp.dest('dist/data'));
 });
 
 gulp.task('extras', () => {
@@ -164,10 +180,15 @@ gulp.task('wiredep', () => {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['lint', 'html', 'images', 'more-images', 'fonts', 'extras', 'data'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
 gulp.task('default', ['clean'], () => {
   gulp.start('build');
+});
+
+gulp.task('deploy', function() {
+    return gulp.src('./dist/**/*')
+        .pipe(githubPages());
 });
