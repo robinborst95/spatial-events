@@ -1,4 +1,3 @@
-
 // global: map, SockJS, Stomp, omnivore
 var domain = '54.76.43.47';
 // 172.28.128.3
@@ -89,7 +88,7 @@ var on_connect = function() {
         }
     );
     subscription = client.subscribe(
-        '/exchange/crisis_download',
+        '/queue/crisis_download',
         function(message) {
             var obj = JSON.parse(message.body);
             var wkt = obj.footprint;
@@ -136,4 +135,3 @@ var on_error = function(evt) {
     console.log('error', evt);
 };
 client.connect('public', 'public', on_connect, on_error, '/');
-

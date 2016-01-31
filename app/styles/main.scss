@@ -8,7 +8,5 @@ $icon-font-path: '../fonts/';
   height: 100vh;
 }
 img.leaflet-tile {
-  /* old style */
-  filter: sepia(10%);
-
+  /* css filters can style the map */
 }
