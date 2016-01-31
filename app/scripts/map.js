@@ -20,7 +20,7 @@ function addMap() {
     // var map = L.mapbox.map('map', 'siggyf.c74e2e04');
 
     map = L.map('map');
-    map.setView([51.505, -0.09], 3);
+    map.setView([51.505, 3.09], 8);
     L.tileLayer(
         'https://api.mapbox.com/v4/{mapid}/{z}/{x}/{y}.{format}?access_token={token}',
         {

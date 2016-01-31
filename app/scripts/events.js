@@ -43,7 +43,7 @@ function fixCoords(coords) {
                 return x;
             },
             coords._latlngs
-        )
+        );
     }
     return coords;
 }
@@ -82,9 +82,7 @@ var on_connect = function() {
             );
             feature.on('click', function(){
                 console.log(this);
-
-            })
-
+            });
         }
     );
     subscription = client.subscribe(
@@ -118,7 +116,7 @@ var on_connect = function() {
             feature.on('click', function(){
                 console.log(this);
 
-            })
+            });
 
         }
     );

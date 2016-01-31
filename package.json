@@ -31,7 +31,12 @@
     "env": {
       "es6": true,
       "node": true,
-      "browser": true
+      "browser": true,
+      "jquery": true
+    },
+    "globals": {
+      "L": true,
+      "moment": true
     },
     "rules": {
       "quotes": [
