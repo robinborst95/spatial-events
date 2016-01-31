@@ -56,7 +56,7 @@ var addTweets; // eslint-disable-line no-unused-vars
     addTweets = function(){
         // Subscribe or load dataset
         // TODO: add /exchange/floodtags subscription here...
-        fetch('../data/tweets.json')
+        fetch('data/tweets.json')
             .then(function(response){
                 return response.json();
             })
