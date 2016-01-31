@@ -22,4 +22,5 @@ $(function () {
         var event = new CustomEvent('incident', {'detail': geojson});
         document.dispatchEvent(event);
     });
+
 });
