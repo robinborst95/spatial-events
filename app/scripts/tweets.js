@@ -67,23 +67,29 @@ var addTweets; // eslint-disable-line no-unused-vars
     addTweets = function(){
         // Subscribe or load dataset
         // TODO: add /exchange/floodtags subscription here...
-        fetch('data/indonesia.json')
-            .then(function(response){
-                return response.json();
-            })
-            .then(function(tweets){
-                if (_.isArray(tweets)) {
-                    _.each(tweets, function(tweet){
-                        addTweet(tweet);
-                    });
-                } else if (_.isObject(tweets)) {
-                    if (!_.get(tweets, 'type') === 'FeatureCollection') {
-                        console.error('No feature collection in tweets', tweets);
+        _.each([
+            'data/indonesia.json',
+            'data/tweets.json'
+        ], function(url) {
+            fetch(url)
+                .then(function(response){
+                    return response.json();
+                })
+                .then(function(tweets){
+                    if (_.isArray(tweets)) {
+                        _.each(tweets, function(tweet){
+                            addTweet(tweet);
+                        });
+                    } else if (_.isObject(tweets)) {
+                        if (!_.get(tweets, 'type') === 'FeatureCollection') {
+                            console.error('No feature collection in tweets', tweets);
+                        }
+                        addTweetCluster(tweets);
                     }
-                    addTweetCluster(tweets);
-                }
 
-            });
+                });
+
+        });
 
         // Once a popup is opened, load the twitter images.
         map.on('popupopen', function(popup) {
