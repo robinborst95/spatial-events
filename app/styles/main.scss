@@ -37,4 +37,8 @@ img.leaflet-tile {
     stroke-linejoin: round;
     stroke-linecap: round;
   }
+  .leaflet-marker-icon {
+    /* filter: url('styles/filters.svg#dropShadow'); */
+    filter: saturate(40%);
+  }
 }

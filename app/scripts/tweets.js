@@ -8,12 +8,23 @@ var addTweets; // eslint-disable-line no-unused-vars
     'use strict';
     // we need to use some internal leaflet variables
     // Ugly global stuff from twtter
+    var addTweetCluster = function(tweets) {
+        var markers = L.markerClusterGroup({ chunkedLoading: true });
+        _.each(tweets.features, function(tweet) {
+            var coordinate = tweet.geometry.coordinates;
+            var marker = L.marker(L.latLng(coordinate[1], coordinate[0]),
+                                  { title: tweet.properties.title });
+            marker.bindPopup(tweet.properties.text);
+            markers.addLayer(marker);
+        });
+        map.addLayer(markers);
+    };
 
     var addTweet = function(tweet) {
         // use the text by default for the popup
         function onEachFeature(feature, layer) {
             // does this feature have a property named popupContent?
-            if (feature.properties && feature.properties.oembed.html) {
+            if (_.has(feature, 'properties.oembed.html')) {
                 // if we have an oembed html, we'll use that
                 layer.bindPopup(feature.properties.oembed.html);
                 // the twttr.widgets.createWidget is not easy to use becausse the body is created on popup
@@ -56,14 +67,21 @@ var addTweets; // eslint-disable-line no-unused-vars
     addTweets = function(){
         // Subscribe or load dataset
         // TODO: add /exchange/floodtags subscription here...
-        fetch('data/tweets.json')
+        fetch('data/indonesia.json')
             .then(function(response){
                 return response.json();
             })
             .then(function(tweets){
-                _.each(tweets, function(tweet){
-                    addTweet(tweet);
-                });
+                if (_.isArray(tweets)) {
+                    _.each(tweets, function(tweet){
+                        addTweet(tweet);
+                    });
+                } else if (_.isObject(tweets)) {
+                    if (!_.get(tweets, 'type') === 'FeatureCollection') {
+                        console.error('No feature collection in tweets', tweets);
+                    }
+                    addTweetCluster(tweets);
+                }
 
             });
 

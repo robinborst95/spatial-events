@@ -15,7 +15,8 @@
     "sockjs-client": "~1.0.0",
     "stomp-websocket": "~2.3.4",
     "leaflet-omnivore": "~0.3.2",
-    "vue": "^1.0.16"
+    "vue": "^1.0.16",
+    "leaflet.markercluster": "^0.4.0"
   },
   "overrides": {
     "bootstrap-sass": {
@@ -23,6 +24,13 @@
         "assets/stylesheets/_bootstrap.scss",
         "assets/fonts/bootstrap/*",
         "assets/javascripts/bootstrap.js"
+      ]
+    },
+    "leaflet.markercluster": {
+      "main": [
+        "dist/MarkerCluster.Default.css",
+        "dist/MarkerCluster.css",
+        "dist/leaflet.markercluster.js"
       ]
     },
     "leaflet-draw": {

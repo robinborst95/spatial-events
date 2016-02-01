@@ -78,9 +78,11 @@ gulp.task('images', () => {
     .pipe(gulp.dest('dist/images'));
 });
 // referenced wrong....
+// also add svg filters
 gulp.task('more-images', () => {
     return gulp.src([
-        'bower_components/leaflet-draw/dist/**/*.{png,jpg,svg}'
+        'bower_components/leaflet-draw/dist/**/*.{png,jpg,svg}',
+        'app/styles/**/*.svg'
     ])
         .pipe(gulp.dest('dist/styles'));
 });
