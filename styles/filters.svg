@@ -1,0 +1,23 @@
+<svg width="100" height="100"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     >
+  <defs>
+    <filter id="blur-100" x="-200%" y="-200%" width="400%" height="400%">
+      <!-- wide blur -->
+      <feGaussianBlur in="SourceGraphic" stdDeviation="100" />
+    </filter>
+
+    <filter id="dropShadow">
+      <!-- subtle drop shadow -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+      <feOffset dx="2" dy="4" />
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+
+</svg>
