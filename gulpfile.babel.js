@@ -81,7 +81,9 @@ gulp.task('images', () => {
 // also add svg filters
 gulp.task('more-images', () => {
     return gulp.src([
+        // these images are relative to the stylesheets so put them in the styles folder
         'bower_components/leaflet-draw/dist/**/*.{png,jpg,svg}',
+        'bower_components/leaflet/dist/**/*.{png,jpg,svg}',
         'app/styles/**/*.svg'
     ])
         .pipe(gulp.dest('dist/styles'));
