@@ -34,6 +34,13 @@ function addMap() {
         editing: false,
         deleting: false
     };
+
+    if (!L.Icon.Default.imagePath) {
+        // if the icon path is not defined it's probably here....
+        L.Icon.Default.imagePath = 'styles/images';
+    }
+
+
     // Initialise the FeatureGroup to store editable layers
     var editableLayers = new L.FeatureGroup();
     map.addLayer(editableLayers);
