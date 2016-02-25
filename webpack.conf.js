@@ -1,30 +1,20 @@
 var webpack = require('webpack');
-var vueSrc = 'app/elements';
+
 var config = {
-    context: __dirname + '/' + vueSrc,
-    entry: 'vue.js',
+    entry: './app/elements/vue.js',
     output: {
-        path: vueSrc,
-        publicPath: vueSrc,
+        path: 'dist/js',
+        publicPath: 'dist',
         filename: 'build.js'
     },
+    devtool: 'source-map',
     babel: {
         presets: ['es2015'],
         plugins: ['transform-runtime']
     },
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        }),
-        new webpack.optimize.OccurenceOrderPlugin()
-    ],
+    resolve:{
+        modulesDirectories: ['node_modules', 'bower_components']
+    },
     module: {
         loaders: [
             {
@@ -32,9 +22,13 @@ var config = {
                 loader: 'vue'
             },
             {
+                test: /\.scss$/,
+                loaders: ['style', 'css', 'sass']
+            },
+            {
                 test: /\.js$/,
                 loader: 'babel',
-                exclude: /node_modules|vue\/dist|vue-router\/|vue-loader\/|vue-hot-reload-api\//
+                exclude: /node_modules/
             }
         ]
     }

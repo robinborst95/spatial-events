@@ -5,8 +5,9 @@ import browserSync from 'browser-sync';
 import del from 'del';
 import {stream as wiredep} from 'wiredep';
 
-import webpack from 'webpack';
+import webpack from 'webpack-stream';
 
+import named from 'vinyl-named';
 import githubPages from 'gulp-gh-pages';
 
 const $ = gulpLoadPlugins();
@@ -39,50 +40,31 @@ gulp.task('scripts', () => {
 });
 
 gulp.task('vue', (callback) => {
-  // vue.js can be es6
-  const vueSrc = 'app/elements';
-  const config = {
-    entry: vueSrc + '/vue.js',
-    output: {
-      path: vueSrc,
-      publicPath: vueSrc,
-      filename: 'build.js'
-    },
-    babel: {
-      presets: ['es2015'],
-      plugins: ['transform-runtime']
-    },
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: '"production"'
-        }
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false
-        }
-      }),
-      new webpack.optimize.OccurenceOrderPlugin()
-    ],
-    module: {
-      loaders: [
-        {
-          test: /\.vue$/,
-          loader: 'vue'
-        },
-        {
-          test: /\.js$/,
-          loader: 'babel',
-          exclude: /node_modules|vue\/dist|vue-router\/|vue-loader\/|vue-hot-reload-api\//
-        }
-      ]
-    }
-  };
-  webpack(config, (err, stats) => {
-    console.log(err);
-    callback();
-  });
+    // vue.js can be es6
+    return gulp.src('./app/elements/vue.js')
+        .pipe(named())
+        .pipe(webpack({
+            devtool: 'source-map',
+            module: {
+                loaders: [
+                    {
+                        test: /\.vue$/,
+                        loader: 'vue'
+                    },
+                    {
+                        test: /\.scss$/,
+                        loaders: ['style', 'css', 'sass']
+                    },
+                    {
+                        test: /\.js$/,
+                        loader: 'babel',
+                        exclude: /node_modules/
+                    }
+                ]
+            }
+        }))
+        .pipe(gulp.dest('.tmp/scripts'))
+        .pipe(reload({stream:true}));
 });
 
 function lint(files, options) {
