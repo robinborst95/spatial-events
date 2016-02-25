@@ -92,6 +92,8 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    <app></app>
+
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
@@ -127,6 +129,10 @@
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
     <!-- endbuild -->
 
+    <!-- Vue bundles -->
+    <!-- build:js scripts/bundle.js -->
+    <script src="scripts/bundle.js"></script>
+    <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
     <script src="scripts/map.js"></script>
@@ -137,20 +143,5 @@
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
 
-
-    <svg id="d">
-      <defs>
-        <filter id="drop-shadow">
-          <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
-          <feOffset dx="5" dy="5" result="offsetblur"/>
-          <feFlood flood-color="#000000"/>
-          <feComposite in2="offsetblur" operator="in"/>
-          <feMerge>
-            <feMergeNode/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-      </defs>
-    </svg>
   </body>
 </html>

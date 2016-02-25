@@ -5,6 +5,9 @@ import browserSync from 'browser-sync';
 import del from 'del';
 import {stream as wiredep} from 'wiredep';
 
+import webpack from 'webpack-stream';
+
+import named from 'vinyl-named';
 import githubPages from 'gulp-gh-pages';
 
 const $ = gulpLoadPlugins();
@@ -33,6 +36,35 @@ gulp.task('scripts', () => {
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('.tmp/scripts'))
     .pipe(reload({stream: true}));
+
+});
+
+gulp.task('vue', (callback) => {
+    // vue.js can be es6
+    return gulp.src('./app/elements/vue.js')
+        .pipe(named())
+        .pipe(webpack({
+            devtool: 'source-map',
+            module: {
+                loaders: [
+                    {
+                        test: /\.vue$/,
+                        loader: 'vue'
+                    },
+                    {
+                        test: /\.scss$/,
+                        loaders: ['style', 'css', 'sass']
+                    },
+                    {
+                        test: /\.js$/,
+                        loader: 'babel',
+                        exclude: /node_modules/
+                    }
+                ]
+            }
+        }))
+        .pipe(gulp.dest('.tmp/scripts'))
+        .pipe(reload({stream:true}));
 });
 
 function lint(files, options) {
@@ -53,7 +85,7 @@ const testLintOptions = {
 gulp.task('lint', lint('app/scripts/**/*.js'));
 gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 
-gulp.task('html', ['styles', 'scripts'], () => {
+gulp.task('html', ['styles', 'scripts', 'vue'], () => {
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.js', $.uglify()))
@@ -114,7 +146,7 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
+gulp.task('serve', ['styles', 'scripts', 'vue', 'fonts'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -135,6 +167,7 @@ gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
 
   gulp.watch('app/styles/**/*.scss', ['styles']);
   gulp.watch('app/scripts/**/*.js', ['scripts']);
+  gulp.watch('app/vue/**/*.js', ['vue']);
   gulp.watch('app/fonts/**/*', ['fonts']);
   gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
@@ -164,6 +197,7 @@ gulp.task('serve:test', ['scripts'], () => {
   });
 
   gulp.watch('app/scripts/**/*.js', ['scripts']);
+  gulp.watch('app/elements/**/*.js', ['vue']);
   gulp.watch('test/spec/**/*.js').on('change', reload);
   gulp.watch('test/spec/**/*.js', ['lint:test']);
 });
