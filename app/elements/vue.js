@@ -1,7 +1,11 @@
 import Vue from 'vue';
-import hello from './hello.vue';
+import eventEditor from './event-editor.vue';
+import verticalTimeline from './vertical-timeline.vue';
 
 new Vue({
   el: 'body',
-  components: { hello }
+    components: {
+        'event-editor': eventEditor,
+        'vertical-timeline': verticalTimeline
+    }
 });

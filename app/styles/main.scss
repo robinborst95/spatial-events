@@ -7,6 +7,13 @@ $icon-font-path: '../fonts/';
 .leaflet-container {
   height: 100vh;
 }
+.fluid-container .row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.nopadding {
+  padding: 0px;
+}
 img.leaflet-tile {
   /* css filters can style the map */
 }

@@ -93,10 +93,6 @@ function addMap() {
             if (map.properties.editing || map.properties.deleting) {
                 return;
             }
-            $('#startDate').data('DateTimePicker').date(moment(layer.feature.properties.startDate));
-            $('#endDate').data('DateTimePicker').date(moment(layer.feature.properties.endDate));
-            $('#modal-form').data(layer);
-            $('#modal-form').modal({});
         });
         // Do whatever else you need to. (save to db, add to map etc)
         editableLayers.addLayer(layer);
