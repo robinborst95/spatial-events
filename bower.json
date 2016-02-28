@@ -18,7 +18,9 @@
     "vue": "^1.0.16",
     "leaflet.markercluster": "^0.4.0",
     "fetch": "^0.11.0",
-    "webcomponentsjs": "^0.7.21"
+    "webcomponentsjs": "^0.7.21",
+    "roboto-fontface": "^0.4.5",
+    "font-awesome": "^4.5.0"
   },
   "overrides": {
     "bootstrap-sass": {
@@ -33,6 +35,12 @@
         "dist/MarkerCluster.Default.css",
         "dist/MarkerCluster.css",
         "dist/leaflet.markercluster.js"
+      ]
+    },
+    "roboto-fontface": {
+      "main": [
+        "./css/roboto-fontface.scss",
+        "./fonts/**/*.{eot,svg,ttf,woff,woff2}"
       ]
     },
     "leaflet-draw": {

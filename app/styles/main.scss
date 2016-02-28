@@ -1,8 +1,14 @@
 $icon-font-path: '../fonts/';
 
+$font-family-sans-serif:  "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif ;
+
+
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "bower_components/roboto-fontface/css/roboto-fontface.scss";
+@import "bower_components/font-awesome/scss/font-awesome.scss";
 // endbower
+
 
 .leaflet-container {
   height: 100vh;
