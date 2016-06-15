@@ -20,8 +20,7 @@
     "fetch": "^0.11.0",
     "webcomponentsjs": "^0.7.21",
     "roboto-fontface": "^0.4.5",
-    "font-awesome": "^4.5.0",
-    "source-code-pro": "git://github.com/adobe-fonts/source-code-pro.git#release"
+    "font-awesome": "^4.5.0"
   },
   "overrides": {
     "bootstrap-sass": {

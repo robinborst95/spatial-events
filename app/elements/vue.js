@@ -4,8 +4,8 @@ import verticalTimeline from './vertical-timeline.vue';
 
 new Vue({
   el: 'body',
-    components: {
-        'event-editor': eventEditor,
-        'vertical-timeline': verticalTimeline
-    }
+  components: {
+    'event-editor': eventEditor,
+    'vertical-timeline': verticalTimeline
+  }
 });

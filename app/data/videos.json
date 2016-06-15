@@ -39,6 +39,9 @@
                 },
                 "channelTitle": "GameStarDE",
                 "liveBroadcastContent": "none"
+            },
+            "trigger": {
+              "zoomLevel": 11
             }
         },
         {
@@ -72,6 +75,9 @@
                 },
                 "channelTitle": "xbox",
                 "liveBroadcastContent": "none"
+            },
+            "trigger": {
+              "zoomLevel": 10
             }
         },
         {
@@ -105,6 +111,9 @@
                 },
                 "channelTitle": "PartiallyRoyal",
                 "liveBroadcastContent": "none"
+            },
+            "trigger": {
+              "zoomLevel": 9
             }
         },
         {
@@ -138,6 +147,9 @@
                 },
                 "channelTitle": "SrSerpienteFantasma",
                 "liveBroadcastContent": "none"
+            },
+            "trigger": {
+              "zoomLevel": 8
             }
         },
         {
@@ -171,6 +183,9 @@
                 },
                 "channelTitle": "BlackSilverUfa",
                 "liveBroadcastContent": "none"
+            },
+            "trigger": {
+              "zoomLevel": 7
             }
         }
     ]
