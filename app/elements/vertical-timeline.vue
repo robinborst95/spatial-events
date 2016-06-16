@@ -1,6 +1,6 @@
 <template>
   <div class="vertical-timeline">
-    <div transition="fade" @click="clickEvent(event, $event)"  v-for="event in events.items" class="timeline-block rotatable">
+    <div transition="expand" @click="clickEvent(event, $event)"  v-for="event in events.items" class="timeline-block rotatable">
       <div class="timeline-img">
         <img :src="event.snippet.thumbnails.high.url" alt="" />
       </div>
@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <rotatable rotatable-class="rotatable" :interval="2000" direction="lastToTop"></rotatable>
+    <rotatable rotatable-class="rotatable" :interval="4000" direction="secondToTop"></rotatable>
     <triggerable :trigger-events="['rotation-end']"></triggerable>
   </div>
 </template>
@@ -59,20 +59,6 @@ export default {
 }
 </script>
 <style>
-.fade-transition {
-  transition: opacity .3s ease;
-}
-
-/* .expand-enter defines the starting state for entering */
-/* .expand-leave defines the ending state for leaving */
-.fade-enter, .fade-leave {
-  opacity: 0;
-}
-
-.translate {
-  transition: transform .3s linear;
-}
-
 .vertical-timeline::before {
  /* this is the vertical line */
  /*content: '';
