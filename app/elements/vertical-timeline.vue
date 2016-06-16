@@ -1,22 +1,20 @@
 <template>
   <div class="vertical-timeline">
+    <rotatable rotatable-class="rotatable" :interval="5000" direction="secondToTop"></rotatable>
+    <triggerable :trigger-events="['rotation-end']"></triggerable>
+
     <div transition="expand" @click="clickEvent(event, $event)"  v-for="event in events.items" class="timeline-block rotatable">
       <div class="timeline-img">
-        <img :src="event.snippet.thumbnails.high.url" alt="" />
+        <img :src="event.image" alt="" />
       </div>
       <div class="timeline-content">
-        <h4><span class="event-source"><i class="fa fa-youtube"></i></span> {{ event.snippet.title }} </h4>
+        <h4><span class="event-source"><i class="fa fa-youtube"></i></span> {{ event.name }} </h4>
         <p>
-          {{ event.snippet.description }}
+          {{ event.description }}
         </p>
-        <a href="{{ event.url }}" class="timeline-details" v-if="event.url">details</a>
-        <span class="timeline-date" >{{ event.snippet.publishedAt | date-fmt}}</span>
 
       </div>
     </div>
-
-    <rotatable rotatable-class="rotatable" :interval="4000" direction="secondToTop"></rotatable>
-    <triggerable :trigger-events="['rotation-end']"></triggerable>
   </div>
 </template>
 <script>
@@ -25,10 +23,10 @@ import triggerable from './triggerable.vue';
 
 export default {
   ready() {
-    fetch("data/videos.json")
+    fetch("data/wadden.json")
       .then((data) => { return data.json(); })
       .then((data) => {
-        console.log('Found video data');
+        console.log('Found wadden data');
         this.$data.events = data;
         this.$broadcast("elements-found", data.items);
       });

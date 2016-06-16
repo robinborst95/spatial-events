@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    <button @click="toggleRotate">Toggle rotate</button>
+  </div>
 </template>
 <script>
 export default {
@@ -80,6 +82,15 @@ export default {
   },
 
   methods: {
+    toggleRotate: function() {
+      if (this.intervalVar !== null) {
+        window.clearInterval(this.intervalVar);
+        this.intervalVar = null;
+      }
+      else {
+        this.startInterval();
+      }
+    },
 
     startInterval: function() {
       var moveFunc = null;

@@ -37,8 +37,54 @@ export default {
     trigger: function() {
       var firstElement = this.elements[0];
 
-      if (firstElement.trigger) {
-        map.setZoom(firstElement.trigger.zoomLevel);
+      if (firstElement.triggerActions) {
+        var actions = [];
+
+        for (var i = 0; i < firstElement.triggerActions.length; i++) {
+          var action = this.getAction(firstElement.triggerActions[i]);
+
+          if (action !== null) {
+            actions.push(action);
+          }
+        }
+
+        console.log(actions);
+
+        var nextFunc = function() {
+          map.off("moveend", nextFunc);
+
+          if (actions[1]) {
+            window.setTimeout(function() {
+              actions[1]();
+            }, 1000);
+          }
+        };
+        map.on("moveend", nextFunc);
+        actions[0]();
+      }
+    },
+
+    getAction: function(action) {
+      switch (action.name) {
+        case "setView":
+          var lat = action.value.lat;
+          var lon = action.value.lon;
+          var zoom = action.value.zoom;
+
+          var center = map.getCenter();
+          var curZoom = map.getZoom();
+
+          // console.log("Current:", center.lat, center.lon, curZoom);
+          if (center.lat == lat && center.lng == lon && curZoom == zoom) {
+            return null;
+          }
+
+          return function() {
+            map.setView([lat, lon], zoom);
+            console.log("Set view");
+          };
+        case "wait":
+          return null;
       }
     }
   }
