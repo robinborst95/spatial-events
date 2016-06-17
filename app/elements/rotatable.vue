@@ -180,6 +180,6 @@ export default {
 </script>
 <style>
 .translate {
-  transition: transform 2s linear;
+  transition: transform .6s linear;
 }
 </style>

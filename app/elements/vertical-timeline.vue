@@ -1,11 +1,12 @@
 <template>
   <div class="vertical-timeline">
     <div transition="expand" @click="clickEvent(event, $event)"  v-for="event in events.items" class="timeline-block rotatable">
-      <div class="timeline-img">
+      <!-- <div class="timeline-img">
         <img :src="event.image" alt="" />
-      </div>
+      </div> -->
       <div class="timeline-content">
-        <h4><span class="event-source"><i class="fa fa-youtube"></i></span> {{ event.name }} </h4>
+        <img class="timeline-img" :src="event.image" alt="" />
+        <h4>{{ event.name }}</h4>
         <p>
           {{ event.description }}
         </p>
@@ -66,43 +67,51 @@ export default {
  /*content: "";
  position: absolute;
  top: 0;
- left: 25px;
+ left: 0px;
  height: 100%;
- width: 4px;
+ width: 2px;
  background: #aeaeae;*/
 }
+
+.timeline-content {
+  text-align: justify;
+}
+
 .timeline-img {
  float:left;
  filter: saturate(20%);
  border-radius: 50%;
- width: 50px ;
- height: 50px;
- margin-top: 10px;
- margin-left: -65px;
+ width: 40px ;
+ height: 40px;
+ margin-right: 10px;
 }
-.timeline-img img {
 
- width: 50px;
- height: 50px;
- border-radius: 50%;
-
-}
 .timeline-block {
   padding: 10px;
   border-color: #AEAEAE;
   border-radius: 10px;
   border-width: thin;
   border-style: solid;
-  margin: 5px 0px 5px 60px;
+  margin: 5px 5px 5px 5px;
   flex: 1 100%;
   cursor: pointer;
-  max-width: calc(100% - 65px);
 }
+
+.timeline-block img {
+  border-color: #AEAEAE;
+  border-radius: 10px;
+  border-width: thin;
+  border-style: solid;
+  flex: 1 100%;
+}
+
 .timeline-block:hover {
   box-shadow: 0 0 3px 1px hsl(0, 0%, 80%);
 }
-.timeline-block:hover .timeline-img {
-  box-shadow: 0 0 3px 1px hsl(0, 0%, 80%);
+
+.timeline-content h4 {
+  line-height: 40px;
+  margin-top: 0px;
 }
 
 .vertical-timeline h1, h2, h3, h4, h5, h6 {
@@ -121,8 +130,7 @@ export default {
   background-color: #1E1E1E;
   display: flex;
   flex-flow: row wrap;
-  overflow: scroll;
-
+  overflow-y: scroll;
 }
 
 </style>
