@@ -15,6 +15,7 @@
 
     <rotatable
       rotatable-class="rotatable"
+      set-elements-event="elements-found"
       :interval="5000"
       direction="secondToTop"></rotatable>
     <triggerable

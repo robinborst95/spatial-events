@@ -25,6 +25,13 @@ export default {
       validator: function (value) {
         return value === "secondToTop" || value === "lastToTop"
       }
+    },
+
+    // Set the name of the event that passes the elements
+    "setElementsEvent": {
+      type: String,
+      required: false,
+      default: null
     }
   },
 
@@ -37,6 +44,10 @@ export default {
   },
 
   ready: function() {
+    if (this.setElementsEvent !== null) {
+      this.$on(this.setElementsEvent, this.setElements);
+    }
+
     // The transitionend event is not fired when the document becomes invisible,
     // so we need to call that function to prevent items to be removed permanently.
     document.addEventListener("visibilitychange", function() {
@@ -72,14 +83,13 @@ export default {
     }.bind(this));
   },
 
-  events: {
-    "elements-found": function(elements) {
+  methods: {
+    // Attach the elements
+    setElements: function(elements) {
       this.elements = elements;
       this.startInterval();
-    }
-  },
+    },
 
-  methods: {
     startInterval: function() {
       var moveFunc = null;
       if (this.direction === "secondToTop")

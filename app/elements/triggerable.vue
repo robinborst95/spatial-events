@@ -13,7 +13,8 @@ export default {
     // Set the name of the event that passes the elements
     "setElementsEvent": {
       type: String,
-      required: true
+      required: false,
+      default: null
     }
   },
 
@@ -28,7 +29,9 @@ export default {
       this.$on(event, this.trigger);
     }.bind(this));
 
-    this.$on(this.setElementsEvent, this.setElements);
+    if (this.setElementsEvent !== null) {
+      this.$on(this.setElementsEvent, this.setElements);
+    }
   },
 
   methods: {
