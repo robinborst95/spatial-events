@@ -22,15 +22,15 @@
   </div>
 </template>
 <script>
-import rotatable from './rotatable.vue';
-import triggerable from './triggerable.vue';
+import rotatable from "./rotatable.vue";
+import triggerable from "./triggerable.vue";
 
 export default {
   ready() {
     fetch("data/wadden.json")
       .then((data) => { return data.json(); })
       .then((data) => {
-        console.log('Found wadden data');
+        console.log("Found wadden data");
         this.$data.events = data;
         this.$broadcast("elements-found", data.items);
       });
@@ -50,20 +50,20 @@ export default {
   },
 
   methods: {
-    // Don't use arrow function, otherwise we don't have this
+    // Don"t use arrow function, otherwise we don"t have this
     clickEvent: function(item, evt) {
       console.log(item, evt,  this);
     }
   },
   filters: {
-    'date-fmt': (x) => { return moment(x).fromNow(); }
+    "date-fmt": (x) => { return moment(x).fromNow(); }
   }
 }
 </script>
 <style>
 .vertical-timeline::before {
  /* this is the vertical line */
- /*content: '';
+ /*content: "";
  position: absolute;
  top: 0;
  left: 25px;

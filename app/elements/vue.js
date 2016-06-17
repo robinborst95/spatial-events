@@ -1,11 +1,9 @@
-import Vue from 'vue';
-import eventEditor from './event-editor.vue';
-import verticalTimeline from './vertical-timeline.vue';
+import Vue from "vue";
+import verticalTimeline from "./vertical-timeline.vue";
 
 new Vue({
-  el: 'body',
+  el: "body",
   components: {
-    'event-editor': eventEditor,
-    'vertical-timeline': verticalTimeline
+    "vertical-timeline": verticalTimeline
   }
 });
