@@ -1,8 +1,5 @@
 <template>
   <div class="vertical-timeline">
-    <rotatable rotatable-class="rotatable" :interval="5000" direction="secondToTop"></rotatable>
-    <triggerable :trigger-events="['rotation-end']"></triggerable>
-
     <div transition="expand" @click="clickEvent(event, $event)"  v-for="event in events.items" class="timeline-block rotatable">
       <div class="timeline-img">
         <img :src="event.image" alt="" />
@@ -12,9 +9,16 @@
         <p>
           {{ event.description }}
         </p>
-
       </div>
     </div>
+
+    <rotatable
+      rotatable-class="rotatable"
+      :interval="5000"
+      direction="secondToTop"></rotatable>
+    <triggerable
+      :trigger-events="['rotation-end']"
+      set-elements-event="elements-found"></triggerable>
   </div>
 </template>
 <script>

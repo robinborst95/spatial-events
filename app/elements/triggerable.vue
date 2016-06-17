@@ -9,6 +9,11 @@ export default {
       type: Array,
       required: false,
       default: function() { return []; }
+    },
+    // Set the name of the event that passes the elements
+    "setElementsEvent": {
+      type: String,
+      required: true
     }
   },
 
@@ -22,69 +27,75 @@ export default {
     _.forEach(this.triggerEvents, function(event) {
       this.$on(event, this.trigger);
     }.bind(this));
-  },
 
-  events: {
-    // Trigger the initial state
-    "elements-found": function(elements) {
-      this.elements = elements;
-      this.trigger();
-    }
+    this.$on(this.setElementsEvent, this.setElements);
   },
 
   methods: {
-    // Perform the top item's action
+
+    // Attach the elements
+    setElements: function(elements) {
+      this.elements = elements;
+      this.trigger();
+    },
+
+    // Perform the top item's actions
     trigger: function() {
       var firstElement = this.elements[0];
 
       if (firstElement.triggerActions) {
-        var actions = [];
+        // Initialize an empty function in the end
+        var nextActionsFunc = function() {};
 
-        for (var i = 0; i < firstElement.triggerActions.length; i++) {
-          var action = this.getAction(firstElement.triggerActions[i]);
-
-          if (action !== null) {
-            actions.push(action);
-          }
+        // Create a chain of actions
+        for (var i = firstElement.triggerActions.length-1; i >= 0; i--) {
+          nextActionsFunc = this.getAction(firstElement.triggerActions[i], nextActionsFunc);
         }
 
-        console.log(actions);
-
-        var nextFunc = function() {
-          map.off("moveend", nextFunc);
-
-          if (actions[1]) {
-            window.setTimeout(function() {
-              actions[1]();
-            }, 1000);
-          }
-        };
-        map.on("moveend", nextFunc);
-        actions[0]();
+        nextActionsFunc();
       }
     },
 
-    getAction: function(action) {
+    // Returns the function to execute for the specified action.
+    // nextActions specifies the function(s) to execute afterwards.
+    getAction: function(action, nextActionsFunc) {
       switch (action.name) {
+        // This action sets the map to a specified center and zoom level
         case "setView":
           var lat = action.value.lat;
           var lon = action.value.lon;
           var zoom = action.value.zoom;
 
-          var center = map.getCenter();
+          var curCenter = map.getCenter();
           var curZoom = map.getZoom();
 
-          // console.log("Current:", center.lat, center.lon, curZoom);
-          if (center.lat == lat && center.lng == lon && curZoom == zoom) {
-            return null;
+          // If the map is already at the wanted view,
+          // just execute the next actions.
+          if (curCenter.lat == lat && curCenter.lng == lon && curZoom == zoom) {
+            return nextActionsFunc;
           }
 
           return function() {
+            // When the map is done moving, remove listener and execute next actions
+            var afterSetView = function() {
+              map.off("moveend", afterSetView);
+              nextActionsFunc();
+            };
+            map.on("moveend", afterSetView);
+
             map.setView([lat, lon], zoom);
-            console.log("Set view");
+            console.log("Set view to [" + lat + ", " + lon + "], zoom " + zoom);
           };
+        // This action just waits for the specified timeout value
         case "wait":
-          return null;
+          var timeout = action.value;
+
+          return function() {
+            console.log("Wait for " + timeout + " milliseconds");
+            window.setTimeout(function() {
+              nextActionsFunc();
+            }, timeout);
+          };
       }
     }
   }
