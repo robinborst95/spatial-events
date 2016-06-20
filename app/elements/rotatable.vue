@@ -89,7 +89,6 @@ export default {
       this.elements = elements;
       this.startInterval();
     },
-
     startInterval: function() {
       var moveFunc = null;
       if (this.direction === "secondToTop")
