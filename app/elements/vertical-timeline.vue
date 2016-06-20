@@ -127,8 +127,8 @@ export default {
   height: 100vh;
   padding: 0;
   margin: 0;
-  color: #AEAEAE;
-  background-color: #1E1E1E;
+  color: #DDD;
+  background-color: #41535A;
   display: flex;
   flex-flow: row wrap;
   overflow-y: scroll;
