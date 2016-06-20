@@ -47,7 +47,8 @@ Include the component in HTML like this:
 ```html
 <triggerable
   :trigger-events="['rotation-end']"
-  set-elements-event="elements-found"></triggerable>
+  set-elements-event="elements-found">
+</triggerable>
 ```
 and triggerable elements in the `elements` array in JSON like this:
 ```json
