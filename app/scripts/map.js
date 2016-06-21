@@ -18,7 +18,7 @@ function uuid() {
 function addMap() {
   // better background map
   var token = "pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA";
-  L.mapbox.accessToken = 'pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA';
+  L.mapbox.accessToken = "pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA";
 
   map = L.mapbox.map("map", "siggyf.c74e2e04");
   console.log("map", map);
@@ -28,7 +28,7 @@ function addMap() {
   // L.tileLayer(
   //     "https://api.mapbox.com/v4/{mapid}/{z}/{x}/{y}.{format}?access_token={token}",
   //     {
-  //         attribution: "&copy; <a href='http://www.openstreetmap.org/copyright'>OSM</a>, &copy; <a href='http://cartodb.com/attributions'>mapbox</a>",
+  //         attribution: "&copy; <a href="http://www.openstreetmap.org/copyright">OSM</a>, &copy; <a href="http://cartodb.com/attributions">mapbox</a>",
   //         token: token,
   //         format: "png",
   //         mapid: "mapbox.dark"
