@@ -1,1 +1,1 @@
-"use strict";addMap();
+"use strict";function uuid(){var x="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,function(x){var a=16*Math.random()|0,e="x"===x?a:3&a|8;return e.toString(16)});return x}function addMap(){L.mapbox.accessToken="pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA",map=L.mapbox.map("map","siggyf.c74e2e04"),console.log("map",map),map.setView([53.2,5.5],9),map.properties={editing:!1,deleting:!1},L.Icon.Default.imagePath||(L.Icon.Default.imagePath="styles/images")}var map;addMap();
