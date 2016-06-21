@@ -71,8 +71,7 @@ export default {
         if (this.intervalVar !== null) {
           console.log("Clear interval");
 
-          window.clearInterval(this.intervalVar);
-          this.intervalVar = null;
+          this.clearInterval();
         }
       } else {
         console.log("Page becomes visible");
@@ -84,11 +83,17 @@ export default {
   },
 
   methods: {
+    clearInterval: function() {
+      window.clearInterval(this.intervalVar);
+      this.intervalVar = null;
+    },
+
     // Attach the elements
     setElements: function(elements) {
       this.elements = elements;
       this.startInterval();
     },
+
     startInterval: function() {
       var moveFunc = null;
       if (this.direction === "secondToTop")
