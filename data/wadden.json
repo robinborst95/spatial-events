@@ -1,0 +1,139 @@
+{
+  "items": [
+    {
+      "name": "Texel",
+      "image": "https://www.planviewer.nl/bestemmingsplannen/map/texel",
+      "description": "Texel is het grootste Nederlandse Waddeneiland. Het behoort tot de provincie Noord-Holland. De gemeente Texel beslaat het gehele eiland plus het onbewoonde eilandje Noorderhaaks.",
+      "triggerActions": [
+        {
+          "name": "setView",
+          "value": {
+            "lat": 53.2,
+            "lon": 5.5,
+            "zoom": 9
+          }
+        },
+        {
+          "name": "wait",
+          "value": 1000
+        },
+        {
+          "name": "setView",
+          "value": {
+            "lat": 53.08,
+            "lon": 4.8,
+            "zoom": 11
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vlieland",
+      "image": "https://www.planviewer.nl/bestemmingsplannen/map/vlieland",
+      "description": "Vlieland is vanuit het westen gerekend het tweede bewoonde Nederlandse Waddeneiland, gelegen in de provincie Friesland. In vroegere tijden maakte het deel uit van het gewest Texla. Het eiland is onderdeel van de gelijknamige gemeente Vlieland.",
+      "triggerActions": [
+        {
+          "name": "setView",
+          "value": {
+            "lat": 53.2,
+            "lon": 5.5,
+            "zoom": 9
+          }
+        },
+        {
+          "name": "wait",
+          "value": 1000
+        },
+        {
+          "name": "setView",
+          "value": {
+            "lat": 53.258,
+            "lon": 4.966,
+            "zoom": 12
+          }
+        }
+      ]
+    },
+    {
+      "name": "Terschelling",
+      "image": "https://www.planviewer.nl/bestemmingsplannen/map/terschelling",
+      "description": "Terschelling is een gemeente in de provincie Friesland en uit het westen gerekend het derde bewoonde Nederlandse Waddeneiland. De totale strandlengte is 30 kilometer en de totale lengte van de fietspaden is ruim 70 kilometer.",
+      "triggerActions": [
+        {
+          "name": "setView",
+          "value": {
+            "lat": 53.2,
+            "lon": 5.5,
+            "zoom": 9
+          }
+        },
+        {
+          "name": "wait",
+          "value": 1000
+        },
+        {
+          "name": "setView",
+          "value": {
+            "lat": 53.4,
+            "lon": 5.353,
+            "zoom": 11
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ameland",
+      "image": "https://www.planviewer.nl/bestemmingsplannen/map/ameland",
+      "description": "Ameland is vanaf het westen gerekend het vierde bewoonde Nederlandse waddeneiland en behoort tot de provincie Friesland. Het gehele eiland valt onder één gemeente, die dezelfde naam draagt. Op 1 april 2016 telde het waddeneiland, en dus ook de gemeente, 3.617 inwoners.",
+      "triggerActions": [
+        {
+          "name": "setView",
+          "value": {
+            "lat": 53.2,
+            "lon": 5.5,
+            "zoom": 9
+          }
+        },
+        {
+          "name": "wait",
+          "value": 1000
+        },
+        {
+          "name": "setView",
+          "value": {
+            "lat": 53.449,
+            "lon": 5.785,
+            "zoom": 11
+          }
+        }
+      ]
+    },
+    {
+      "name": "Schiermonnikoog",
+      "image": "https://www.planviewer.nl/bestemmingsplannen/map/schiermonnikoog",
+      "description": "Schiermonnikoog is vanuit het westen gerekend het vijfde bewoonde Nederlandse waddeneiland en behoort tot de provincie Friesland. Het gehele eiland valt onder één gemeente, die dezelfde naam draagt. De hoogste duintop is 20 meter (ter vergelijking: op Vlieland 45 meter).",
+      "triggerActions": [
+        {
+          "name": "setView",
+          "value": {
+            "lat": 53.2,
+            "lon": 5.5,
+            "zoom": 9
+          }
+        },
+        {
+          "name": "wait",
+          "value": 1000
+        },
+        {
+          "name": "setView",
+          "value": {
+            "lat": 53.494,
+            "lon": 6.256,
+            "zoom": 12
+          }
+        }
+      ]
+    }
+  ]
+}
