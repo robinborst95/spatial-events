@@ -20,7 +20,8 @@ export default {
 
   data: function() {
     return {
-      elements: []
+      elements: [],
+      cannotEndZoom: false
     }
   },
 
@@ -32,12 +33,16 @@ export default {
     if (this.setElementsEvent !== null) {
       this.$on(this.setElementsEvent, this.setElements);
     }
+
+
   },
 
   methods: {
-
     // Attach the elements
     setElements: function(elements) {
+      // To set the zoom duration, we need a work-around, see that method for details.
+      this.setZoomWorkAround();
+
       this.elements = elements;
       this.trigger();
     },
@@ -92,8 +97,6 @@ export default {
       var curCenterLon = parseFloat(map.getCenter().lng);
       var newCenterLat = parseFloat(bounds.getCenter().lat);
       var newCenterLon = parseFloat(bounds.getCenter().lng);
-      console.log("curLat: " + curCenterLat + ", newLat: " + newCenterLat);
-      console.log("curLon: " + curCenterLon + ", newLon: " + newCenterLon);
       if (Math.abs(curCenterLat - newCenterLat) < 0.01 && Math.abs(curCenterLon - newCenterLon) < 0.01) {
         return nextActionsFunc;
       }
@@ -113,6 +116,7 @@ export default {
         map.on("moveend", afterSetView);
 
         map.fitBounds(bounds);
+        this.setZoomTimeout();
       }.bind(this);
     },
 
@@ -125,9 +129,41 @@ export default {
           nextActionsFunc();
         }, timeout);
       };
+    },
+
+    // Mapbox uses a timeout function to fire the zoomend event. To declare our own
+    // duration we need to intercept the zoom end function and check whether we the
+    // animation actually ended. If the zoom cannot be ended, we ignore the call,
+    // otherwise we just call the zoomend function of mapbox.
+    setZoomWorkAround: function() {
+      var zoomendFunc = map._onZoomTransitionEnd;
+
+      map._onZoomTransitionEnd = function() {
+        if (this.cannotEndZoom) {
+          return;
+        }
+        zoomendFunc.bind(map)();
+      }.bind(this);
+    },
+
+    // To set the zoom duration we need to set an interval greater than 250 ms
+    // (the default zoom duration of mapbox) to catch that timeout call and
+    // less than the wanted duration. Then we set a timeout for our wanted
+    // duration, like mapbox did it. (Also set the duration in the css!)
+    setZoomTimeout: function() {
+      this.cannotEndZoom = true;
+      window.setTimeout(function() {
+        this.cannotEndZoom = false;
+      }.bind(this), 500);
+      window.setTimeout(function() {
+        map._onZoomTransitionEnd();
+      }, 1000);
     }
   }
 }
 </script>
 <style>
+.leaflet-zoom-anim .leaflet-zoom-animated {
+  transition: transform 1s cubic-bezier(0,0,0.25,1);
+}
 </style>
