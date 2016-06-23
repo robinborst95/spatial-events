@@ -3,7 +3,7 @@
 Example project for rotatable and triggerable lists.
 
 ## Rotatable component
-The rotatable component rotates a list of div's and must be used as followed. 
+The rotatable component rotates a list of div's and must be used as followed.
 
 Include the component in HTML like this:
 ```html
@@ -21,12 +21,12 @@ Include the component in HTML like this:
 
 #### Indicating the rotatable div's
 The attribute `rotatable-class` is required and indicates which div's need to be rotated.
-These div's must have the `class=[rotatable-class]` property. 
-The div's also must be filled dynamically from an array `elements` as in `v-for="element in elements"`. 
+These div's must have the `class=[rotatable-class]` property.
+The div's also must be filled dynamically from an array `elements` as in `v-for="element in elements"`.
 Another important attribute that must be set, is `transition="expand"`. This property takes care of firing a transition event, which is used for beginning the rotation.
 
 #### Set elements
-The array `elements` can be passed in two ways: 
+The array `elements` can be passed in two ways:
 - Call `setElements(elements)` on the `rotatable` component.
 - Set the value of `set-elements-event` to the name of the `$broadcast` event.
 
@@ -54,31 +54,41 @@ and triggerable elements in the `elements` array in JSON like this:
 ```json
 "triggerActions": [
   {
-    "name": "setView",
-    "value": {
-      "lat": 53.2,
-      "lon": 5.5,
-      "zoom": 9
+    "name": "fitBounds",
+    "value": [
+      {
+        "lat": 52.931,
+        "lon": 4.651
+      },
+      {
+        "lat": 53.540,
+        "lon": 6.446
+      }
+    ],
+    "actionAfter": {
+      "name": "wait",
+      "value": 1000
     }
   },
   {
-    "name": "wait",
-    "value": 1000
-  },
-  {
-    "name": "setView",
-    "value": {
-      "lat": 53.4,
-      "lon": 5.353,
-      "zoom": 11
-    }
+    "name": "fitBounds",
+    "value": [
+      {
+        "lat": 52.957,
+        "lon": 4.643
+      },
+      {
+        "lat": 53.188,
+        "lon": 4.920
+      }
+    ]
   }
 ]
 ```
-This trigger sets the map to a zoomed out view, then waits for 1 second and then zooms in to another center. New actions can be made by defining the values in json and adding a `case` clause in the `getAction` function in `triggerable.vue`. In this function a function `nextActionsFunc` is passed, which must be invoked when the action is finished (e.g. for `setView` the next actions must be invoked once the map is updated correctly).  
+This trigger sets the map to a zoomed out view, then waits for 1 second and then zooms in to another center. The `fitBounds` action zooms to the wanted view depending on the available screen size. The waiting only happens if the map actually changed. New actions can be made by defining the values in json and adding a `case` clause in the `getAction` function in `triggerable.vue`. In this function a function `nextActionsFunc` is passed, which must be invoked when the action is finished (e.g. for `fitBounds` the next actions must be invoked once the map is updated correctly).  
 
 #### Set elements
-The array `elements` can be passed in two ways: 
+The array `elements` can be passed in two ways:
 - Call `setElements(elements)` on the `triggerable` component.
 - Set the value of `set-elements-event` to the name of the `$broadcast` event.
 

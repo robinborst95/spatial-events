@@ -63,43 +63,68 @@ export default {
     // nextActions specifies the function(s) to execute afterwards.
     getAction: function(action, nextActionsFunc) {
       switch (action.name) {
-        // This action sets the map to a specified center and zoom level
-        case "setView":
-          var lat = action.value.lat;
-          var lon = action.value.lon;
-          var zoom = action.value.zoom;
+        // This action sets the view to fit the bounds given
+        case "fitBounds":
+          return this.getActionFitBounds(action, nextActionsFunc);
 
-          var curCenter = map.getCenter();
-          var curZoom = map.getZoom();
-
-          // If the map is already at the wanted view,
-          // just execute the next actions.
-          if (curCenter.lat == lat && curCenter.lng == lon && curZoom == zoom) {
-            return nextActionsFunc;
-          }
-
-          return function() {
-            // When the map is done moving, remove listener and execute next actions
-            var afterSetView = function() {
-              map.off("moveend", afterSetView);
-              nextActionsFunc();
-            };
-            map.on("moveend", afterSetView);
-
-            map.setView([lat, lon], zoom);
-            console.log("Set view to [" + lat + ", " + lon + "], zoom " + zoom);
-          };
         // This action just waits for the specified timeout value
         case "wait":
-          var timeout = action.value;
+          return this.getActionWait(action, nextActionsFunc);
 
-          return function() {
-            console.log("Wait for " + timeout + " milliseconds");
-            window.setTimeout(function() {
-              nextActionsFunc();
-            }, timeout);
-          };
+        default:
+          return nextActionsFunc;
       }
+    },
+
+    getActionFitBounds: function(action, nextActionsFunc) {
+      var points = [];
+
+      for (var idx = 0; idx < action.value.length; idx++) {
+        var point = action.value[idx];
+        points.push([point.lat, point.lon]);
+      }
+
+      var bounds = L.latLngBounds(points);
+
+      // If the map is already at the wanted view,
+      // just execute the next actions.
+      var curCenterLat = parseFloat(map.getCenter().lat);
+      var curCenterLon = parseFloat(map.getCenter().lng);
+      var newCenterLat = parseFloat(bounds.getCenter().lat);
+      var newCenterLon = parseFloat(bounds.getCenter().lng);
+      console.log("curLat: " + curCenterLat + ", newLat: " + newCenterLat);
+      console.log("curLon: " + curCenterLon + ", newLon: " + newCenterLon);
+      if (Math.abs(curCenterLat - newCenterLat) < 0.01 && Math.abs(curCenterLon - newCenterLon) < 0.01) {
+        return nextActionsFunc;
+      }
+
+      return function() {
+        // When the map is done moving, remove listener and execute next actions
+        var afterSetView = function() {
+          console.log("Set view to [" + map.getCenter().lat + ", " + map.getCenter().lng + "], zoom " + map.getZoom());
+          map.off("moveend", afterSetView);
+
+          if (action.actionAfter) {
+            this.getActionWait(action.actionAfter, nextActionsFunc)();
+          } else {
+            nextActionsFunc();
+          }
+        }.bind(this);
+        map.on("moveend", afterSetView);
+
+        map.fitBounds(bounds);
+      }.bind(this);
+    },
+
+    getActionWait: function(action, nextActionsFunc) {
+      var timeout = action.value;
+
+      return function() {
+        console.log("Wait for " + timeout + " milliseconds");
+        window.setTimeout(function() {
+          nextActionsFunc();
+        }, timeout);
+      };
     }
   }
 }

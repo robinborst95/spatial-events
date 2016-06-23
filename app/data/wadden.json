@@ -6,24 +6,34 @@
       "description": "Texel is het grootste Nederlandse Waddeneiland. Het behoort tot de provincie Noord-Holland. De gemeente Texel beslaat het gehele eiland plus het onbewoonde eilandje Noorderhaaks.",
       "triggerActions": [
         {
-          "name": "setView",
-          "value": {
-            "lat": 53.2,
-            "lon": 5.5,
-            "zoom": 9
+          "name": "fitBounds",
+          "value": [
+            {
+              "lat": 52.931,
+              "lon": 4.651
+            },
+            {
+              "lat": 53.540,
+              "lon": 6.446
+            }
+          ],
+          "actionAfter": {
+            "name": "wait",
+            "value": 1000
           }
         },
         {
-          "name": "wait",
-          "value": 1000
-        },
-        {
-          "name": "setView",
-          "value": {
-            "lat": 53.08,
-            "lon": 4.8,
-            "zoom": 11
-          }
+          "name": "fitBounds",
+          "value": [
+            {
+              "lat": 52.957,
+              "lon": 4.643
+            },
+            {
+              "lat": 53.188,
+              "lon": 4.920
+            }
+          ]
         }
       ]
     },
@@ -33,24 +43,34 @@
       "description": "Vlieland is vanuit het westen gerekend het tweede bewoonde Nederlandse Waddeneiland, gelegen in de provincie Friesland. In vroegere tijden maakte het deel uit van het gewest Texla. Het eiland is onderdeel van de gelijknamige gemeente Vlieland.",
       "triggerActions": [
         {
-          "name": "setView",
-          "value": {
-            "lat": 53.2,
-            "lon": 5.5,
-            "zoom": 9
+          "name": "fitBounds",
+          "value": [
+            {
+              "lat": 52.931,
+              "lon": 4.651
+            },
+            {
+              "lat": 53.540,
+              "lon": 6.446
+            }
+          ],
+          "actionAfter": {
+            "name": "wait",
+            "value": 1000
           }
         },
         {
-          "name": "wait",
-          "value": 1000
-        },
-        {
-          "name": "setView",
-          "value": {
-            "lat": 53.258,
-            "lon": 4.966,
-            "zoom": 12
-          }
+          "name": "fitBounds",
+          "value": [
+            {
+              "lat": 53.2,
+              "lon": 4.836
+            },
+            {
+              "lat": 53.315,
+              "lon": 5.167
+            }
+          ]
         }
       ]
     },
@@ -60,24 +80,34 @@
       "description": "Terschelling is een gemeente in de provincie Friesland en uit het westen gerekend het derde bewoonde Nederlandse Waddeneiland. De totale strandlengte is 30 kilometer en de totale lengte van de fietspaden is ruim 70 kilometer.",
       "triggerActions": [
         {
-          "name": "setView",
-          "value": {
-            "lat": 53.2,
-            "lon": 5.5,
-            "zoom": 9
+          "name": "fitBounds",
+          "value": [
+            {
+              "lat": 52.931,
+              "lon": 4.651
+            },
+            {
+              "lat": 53.540,
+              "lon": 6.446
+            }
+          ],
+          "actionAfter": {
+            "name": "wait",
+            "value": 1000
           }
         },
         {
-          "name": "wait",
-          "value": 1000
-        },
-        {
-          "name": "setView",
-          "value": {
-            "lat": 53.4,
-            "lon": 5.353,
-            "zoom": 11
-          }
+          "name": "fitBounds",
+          "value": [
+            {
+              "lat": 53.343,
+              "lon": 5.139
+            },
+            {
+              "lat": 53.452,
+              "lon": 5.571
+            }
+          ]
         }
       ]
     },
@@ -87,24 +117,34 @@
       "description": "Ameland is vanaf het westen gerekend het vierde bewoonde Nederlandse waddeneiland en behoort tot de provincie Friesland. Het gehele eiland valt onder één gemeente, die dezelfde naam draagt. Op 1 april 2016 telde het waddeneiland, en dus ook de gemeente, 3.617 inwoners.",
       "triggerActions": [
         {
-          "name": "setView",
-          "value": {
-            "lat": 53.2,
-            "lon": 5.5,
-            "zoom": 9
+          "name": "fitBounds",
+          "value": [
+            {
+              "lat": 52.931,
+              "lon": 4.651
+            },
+            {
+              "lat": 53.540,
+              "lon": 6.446
+            }
+          ],
+          "actionAfter": {
+            "name": "wait",
+            "value": 1000
           }
         },
         {
-          "name": "wait",
-          "value": 1000
-        },
-        {
-          "name": "setView",
-          "value": {
-            "lat": 53.449,
-            "lon": 5.785,
-            "zoom": 11
-          }
+          "name": "fitBounds",
+          "value": [
+            {
+              "lat": 53.422,
+              "lon": 5.601
+            },
+            {
+              "lat": 53.476,
+              "lon": 5.980
+            }
+          ]
         }
       ]
     },
@@ -114,24 +154,34 @@
       "description": "Schiermonnikoog is vanuit het westen gerekend het vijfde bewoonde Nederlandse waddeneiland en behoort tot de provincie Friesland. Het gehele eiland valt onder één gemeente, die dezelfde naam draagt. De hoogste duintop is 20 meter (ter vergelijking: op Vlieland 45 meter).",
       "triggerActions": [
         {
-          "name": "setView",
-          "value": {
-            "lat": 53.2,
-            "lon": 5.5,
-            "zoom": 9
+          "name": "fitBounds",
+          "value": [
+            {
+              "lat": 52.931,
+              "lon": 4.651
+            },
+            {
+              "lat": 53.540,
+              "lon": 6.446
+            }
+          ],
+          "actionAfter": {
+            "name": "wait",
+            "value": 1000
           }
         },
         {
-          "name": "wait",
-          "value": 1000
-        },
-        {
-          "name": "setView",
-          "value": {
-            "lat": 53.494,
-            "lon": 6.256,
-            "zoom": 12
-          }
+          "name": "fitBounds",
+          "value": [
+            {
+              "lat": 53.463,
+              "lon": 6.124
+            },
+            {
+              "lat": 53.530,
+              "lon": 6.429
+            }
+          ]
         }
       ]
     }

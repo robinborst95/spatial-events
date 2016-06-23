@@ -24,7 +24,10 @@ function addMap() {
   console.log("map", map);
 
   // map = L.map("map");
-  map.setView([53.2, 5.5], 9);
+  var points = [[52.931, 4.651], [53.540, 6.446]];
+  var bounds = L.latLngBounds(points);
+  console.log("Set initial view to [" + bounds.getCenter().lat + ", " + bounds.getCenter().lng + "]");
+  map.fitBounds(bounds);
   // L.tileLayer(
   //     "https://api.mapbox.com/v4/{mapid}/{z}/{x}/{y}.{format}?access_token={token}",
   //     {
