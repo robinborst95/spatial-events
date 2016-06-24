@@ -21,7 +21,9 @@ export default {
   data: function() {
     return {
       elements: [],
-      cannotEndZoom: false
+      cannotEndZoom: false,
+      cachedTiles: {},
+    	curTilePoint: null
     }
   },
 
@@ -40,8 +42,10 @@ export default {
   methods: {
     // Attach the elements
     setElements: function(elements) {
-      // To set the zoom duration, we need a work-around, see that method for details.
+      // To set the zoom duration, we need a work-around.
       this.setZoomWorkAround();
+      // To Cache the background when zooming out, we need a work-around.
+      this.setCacheBgWorkAround();
 
       this.elements = elements;
       this.trigger();
@@ -104,7 +108,7 @@ export default {
       return function() {
         // When the map is done moving, remove listener and execute next actions
         var afterSetView = function() {
-          console.log("Set view to [" + map.getCenter().lat + ", " + map.getCenter().lng + "], zoom " + map.getZoom());
+          // console.log("Set view to [" + map.getCenter().lat + ", " + map.getCenter().lng + "], zoom " + map.getZoom());
           map.off("moveend", afterSetView);
 
           if (action.actionAfter) {
@@ -124,7 +128,7 @@ export default {
       var timeout = action.value;
 
       return function() {
-        console.log("Wait for " + timeout + " milliseconds");
+        // console.log("Wait for " + timeout + " milliseconds");
         window.setTimeout(function() {
           nextActionsFunc();
         }, timeout);
@@ -157,13 +161,56 @@ export default {
       }.bind(this), 500);
       window.setTimeout(function() {
         map._onZoomTransitionEnd();
-      }, 1000);
+      }, 1500);
+    },
+
+    // In mapbox, the view is updated when the zoom is finished, so while
+    // zooming, the background is white. To prevent this, we need to make
+    // the cached background visible while zooming.
+    // To prevent the screen from flickering when the zoom has ended (the
+    // view is reloaded then), we cache the tiles so that they can be reloaded.
+    setCacheBgWorkAround: function() {
+      var _this = this;
+
+      // To prevent the background buffer from being cleared, we ignore clearing.
+  		map.tileLayer._clearBgBuffer = function() {	};
+
+      // When mapbox wants a tile, it calls _getTile, in which a new tile is
+      // created. Since we don't want reloading to prevent flickering, we cache
+      // the created tiles and return a cached tile if the tile at that position
+      // has already been seen.
+  		var getTileFunc = map.tileLayer._getTile;
+  		map.tileLayer._getTile = function() {
+  			var key = _this.curTilePoint.x + ":" + _this.curTilePoint.y;
+  			if (_this.cachedTiles[key]) {
+  				return _this.cachedTiles[key];
+  			}
+
+  			var tile = getTileFunc.bind(this)();
+  			_this.cachedTiles[key] = tile;
+  			return tile;
+  		}.bind(map.tileLayer);
+
+      // In _getTile the current position is not passed, so we save it here.
+  		var addTileFunc = map.tileLayer._addTile;
+  		map.tileLayer._addTile = function(tilePoint, container) {
+  			_this.curTilePoint = tilePoint;
+  			addTileFunc.bind(this)(tilePoint, container);
+  		}.bind(map.tileLayer);
+
+      // In _prepareBgBuffer the background is set invisible,
+      // so we remove that style property so make it visible.
+  		var prepareBgBufferFunc = map.tileLayer._prepareBgBuffer;
+  		map.tileLayer._prepareBgBuffer = function() {
+  			prepareBgBufferFunc.bind(this)();
+  			this._tileContainer.style.visibility = "";
+  		}.bind(map.tileLayer);
     }
   }
 }
 </script>
 <style>
 .leaflet-zoom-anim .leaflet-zoom-animated {
-  transition: transform 1s cubic-bezier(0,0,0.25,1);
+  transition: transform 1.5s cubic-bezier(0,0,0.25,1);
 }
 </style>
