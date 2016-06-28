@@ -86,14 +86,9 @@ export default {
     },
 
     getActionFitBounds: function(action, nextActionsFunc) {
-      var points = [];
-
-      for (var idx = 0; idx < action.value.length; idx++) {
-        var point = action.value[idx];
-        points.push([point.lat, point.lon]);
-      }
-
-      var bounds = L.latLngBounds(points);
+      var southWest = L.latLng(action.value.sw.lat, action.value.sw.lon);
+      var northEast = L.latLng(action.value.ne.lat, action.value.ne.lon);
+      var bounds = L.latLngBounds(southWest, northEast);
 
       // If the map is already at the wanted view,
       // just execute the next actions.

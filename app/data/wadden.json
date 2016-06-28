@@ -7,16 +7,16 @@
       "triggerActions": [
         {
           "name": "fitBounds",
-          "value": [
-            {
+          "value": {
+            "sw": {
               "lat": 52.931,
               "lon": 4.651
             },
-            {
+            "ne": {
               "lat": 53.540,
               "lon": 6.446
             }
-          ],
+          },
           "actionAfter": {
             "name": "wait",
             "value": 1000
@@ -24,16 +24,16 @@
         },
         {
           "name": "fitBounds",
-          "value": [
-            {
+          "value": {
+            "sw": {
               "lat": 52.957,
               "lon": 4.643
             },
-            {
+            "ne": {
               "lat": 53.188,
               "lon": 4.920
             }
-          ]
+          }
         }
       ]
     },
@@ -44,16 +44,16 @@
       "triggerActions": [
         {
           "name": "fitBounds",
-          "value": [
-            {
+          "value": {
+            "sw": {
               "lat": 52.931,
               "lon": 4.651
             },
-            {
+            "ne": {
               "lat": 53.540,
               "lon": 6.446
             }
-          ],
+          },
           "actionAfter": {
             "name": "wait",
             "value": 1000
@@ -61,16 +61,16 @@
         },
         {
           "name": "fitBounds",
-          "value": [
-            {
+          "value": {
+            "sw": {
               "lat": 53.2,
               "lon": 4.836
             },
-            {
+            "ne": {
               "lat": 53.315,
               "lon": 5.167
             }
-          ]
+          }
         }
       ]
     },
@@ -81,16 +81,16 @@
       "triggerActions": [
         {
           "name": "fitBounds",
-          "value": [
-            {
+          "value": {
+            "sw": {
               "lat": 52.931,
               "lon": 4.651
             },
-            {
+            "ne": {
               "lat": 53.540,
               "lon": 6.446
             }
-          ],
+          },
           "actionAfter": {
             "name": "wait",
             "value": 1000
@@ -98,16 +98,16 @@
         },
         {
           "name": "fitBounds",
-          "value": [
-            {
+          "value": {
+            "sw": {
               "lat": 53.343,
               "lon": 5.139
             },
-            {
+            "ne": {
               "lat": 53.452,
               "lon": 5.571
             }
-          ]
+          }
         }
       ]
     },
@@ -118,16 +118,16 @@
       "triggerActions": [
         {
           "name": "fitBounds",
-          "value": [
-            {
+          "value": {
+            "sw": {
               "lat": 52.931,
               "lon": 4.651
             },
-            {
+            "ne": {
               "lat": 53.540,
               "lon": 6.446
             }
-          ],
+          },
           "actionAfter": {
             "name": "wait",
             "value": 1000
@@ -135,16 +135,16 @@
         },
         {
           "name": "fitBounds",
-          "value": [
-            {
+          "value": {
+            "sw": {
               "lat": 53.422,
               "lon": 5.601
             },
-            {
+            "ne": {
               "lat": 53.476,
               "lon": 5.980
             }
-          ]
+          }
         }
       ]
     },
@@ -155,16 +155,16 @@
       "triggerActions": [
         {
           "name": "fitBounds",
-          "value": [
-            {
+          "value": {
+            "sw": {
               "lat": 52.931,
               "lon": 4.651
             },
-            {
+            "ne": {
               "lat": 53.540,
               "lon": 6.446
             }
-          ],
+          },
           "actionAfter": {
             "name": "wait",
             "value": 1000
@@ -172,16 +172,16 @@
         },
         {
           "name": "fitBounds",
-          "value": [
-            {
+          "value": {
+            "sw": {
               "lat": 53.463,
               "lon": 6.124
             },
-            {
+            "ne": {
               "lat": 53.530,
               "lon": 6.429
             }
-          ]
+          }
         }
       ]
     }
